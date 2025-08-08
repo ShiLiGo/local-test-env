@@ -2,21 +2,13 @@ FROM ccr.ccs.tencentyun.com/qcloud/centos:latest
 RUN rm /etc/yum.repos.d/CentOS-Epel.repo
 RUN --mount=type=bind,source=Centos-7.repo,target=Centos-7.repo \
     cp Centos-7.repo /etc/yum.repos.d/CentOS-Base.repo
-RUN yum install -y epel-release && \
-        yum install -y protobuf-devel && \
-        yum install -y lua-devel && \
-        yum install -y libevent-devel && \
-        yum install -y hiredis-devel && \
-        yum install -y log4cplus-devel && \
-        yum install -y boost-devel && \
-        yum install -y jsoncpp-devel && \
-        yum install -y libuuid-devel && \
-        yum install -y openssl-devel && \
-        yum install -y libcurl-devel && \
-        yum install -y mariadb-devel && \
-        yum install -y gcc && \
-        yum install -y python-devel && \
-        yum install -y make
+RUN yum install -y epel-release
+RUN yum install -y protobuf-devel lua-devel libevent-devel \
+        hiredis-devel log4cplus-devel boost-devel jsoncpp-devel \
+        libuuid-devel openssl-devel libcurl-devel mariadb-devel \
+        gcc python-devel make perl-IPC-Cmd \
+        bzip2-devel ncurses-devel lz4-devel sqlite-devel \
+        tk-devel readline-devel
 RUN mkdir -p /home/python
 ADD ./requirement.txt /home/python
 RUN cd /home/python && \
@@ -37,12 +29,17 @@ RUN cd /home/software && cd python-libevent-0.9.2 && \
         cat setup.py && \
         python setup.py build && \
         python setup.py install
-RUN yum install -y perl-IPC-Cmd
 ADD ./openssl-3.1.1.tar /home/software
 RUN cd /home/software/openssl-3.1.1 && CFLAGS=-fPIC ./config --prefix=/usr/duole  && make && make install
 RUN echo "/usr/local/lib64" >> /etc/ld.so.conf && echo "/usr/duole/lib64" >> /etc/ld.so.conf && ldconfig
 ADD ./Python-3.10.12.tar /home/software
-RUN cd /home/software/Python-3.10.12 && ./configure --enable-optimizations --with-lto --with-openssl=/usr/duole --with-openssl-rpath=/usr/duole/lib64 && make && make install
+RUN yum install -y libffi-devel
+RUN cd /home/software/Python-3.10.12 && \
+        ./configure --enable-optimizations --with-lto --with-openssl=/usr/duole --with-openssl-rpath=/usr/duole/lib64 && \
+        sed -i '207s/.*/OPENSSL_LDFLAGS=-L\/usr\/duole\/lib64/' Makefile && \
+        make && \
+        make install
+ADD ./cert.pem /usr/duole/ssl
 # /home/software/Python-3.10.12/Modules/_ctypes/_ctypes.c:107:17: fatal error: ffi.h: No such file or directory
 # #include <ffi.h>
 # ^
