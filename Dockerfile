@@ -40,28 +40,5 @@ RUN cd /home/software/Python-3.10.12 && \
         make && \
         make install
 ADD ./cert.pem /usr/duole/ssl
-# /home/software/Python-3.10.12/Modules/_ctypes/_ctypes.c:107:17: fatal error: ffi.h: No such file or directory
-# #include <ffi.h>
-# ^
-# compilation terminated.
-# *** WARNING: renaming "_ssl" since importing it failed: /home/software/Python-3.10.12/build/lib.linux-x86_64-3.10/_ssl.cpython-310-x86_64-linux-gnu.so: undefined symbol: OPENSSL_sk_num
-# *** WARNING: renaming "_hashlib" since importing it failed: /home/software/Python-3.10.12/build/lib.linux-x86_64-3.10/_hashlib.cpython-310-x86_64-linux-gnu.so: undefined symbol: EVP_MD_get_type
-# The necessary bits to build these optional modules were not found:
-# _bz2 _curses _curses_panel
-# _lzma _sqlite3 _tkinter
-# readline
-# To find the necessary bits, look in setup.py in detect_modules() for the module's name.
-# The following modules found by detect_modules() in setup.py, have been
-# built by the Makefile instead, as configured by the Setup files:
-# _abc pwd time
-# Failed to build these modules:
-# _ctypes
-# Failed to build these modules:
-# _ctypes
-# Following modules built successfully but were removed because they could not be imported:
-# _hashlib _ssl
-# Could not build the ssl module!
-# Python requires a OpenSSL 1.1.1 or newer
-# Custom linker flags may require --with-openssl-rpath=auto
 RUN mkdir -p /var/baohuang
 CMD ["tail", "-f", "/dev/null"]
