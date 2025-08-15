@@ -9,7 +9,8 @@ RUN yum install -y protobuf-devel lua-devel libevent-devel \
         libuuid-devel openssl-devel libcurl-devel mariadb-devel \
         gcc python-devel make perl-IPC-Cmd \
         bzip2-devel ncurses-devel lz4-devel sqlite-devel \
-        tk-devel readline-devel libffi-devel
+        tk-devel readline-devel libffi-devel \
+        cmake gcc-c++
 RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py && \
         python get-pip.py && \
         pip install --upgrade pip && \
