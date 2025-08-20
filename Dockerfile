@@ -1,7 +1,7 @@
 FROM ccr.ccs.tencentyun.com/qcloud/centos:latest
 RUN rm /etc/yum.repos.d/CentOS-Epel.repo
 WORKDIR /app
-COPY . .
+COPY Centos-7.repo cert.pem libevent-2.0.22-stable.tar openssl-3.1.1.tar Python-3.10.12.tar python-libevent-0.9.2.tar requirement.txt uwsgi-2.0.20.tar /app/
 RUN cp Centos-7.repo /etc/yum.repos.d/CentOS-Base.repo
 RUN yum install -y epel-release
 RUN yum install -y protobuf-devel lua-devel libevent-devel \
@@ -41,5 +41,10 @@ RUN tar -xvf Python-3.10.12.tar && \
         sed -i '207s/.*/OPENSSL_LDFLAGS=-L\/usr\/duole\/lib64/' Makefile && \
         make && \
         make install
+RUN tar -xvf uwsgi-2.0.20.tar && \
+        cd /app/uwsgi-2.0.20 && \
+        sed -i -e '1300a\                    self.cflags.append("-I/usr/duole/include")\n                    self.libs.append("-L/usr/duole/lib64")' uwsgiconfig.py && \
+        sed -i -e '1309a\                self.cflags.append("-I/usr/duole/include")\n                self.libs.append("-L/usr/duole/lib64")' uwsgiconfig.py && \
+        python3 setup.py install
 RUN mkdir -p /var/baohuang
 CMD ["tail", "-f", "/dev/null"]
