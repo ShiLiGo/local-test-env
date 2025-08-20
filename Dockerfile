@@ -46,5 +46,14 @@ RUN tar -xvf uwsgi-2.0.20.tar && \
         sed -i -e '1300a\                    self.cflags.append("-I/usr/duole/include")\n                    self.libs.append("-L/usr/duole/lib64")' uwsgiconfig.py && \
         sed -i -e '1309a\                self.cflags.append("-I/usr/duole/include")\n                self.libs.append("-L/usr/duole/lib64")' uwsgiconfig.py && \
         python3 setup.py install
+COPY libwebsockets.tar.gz /app/
+RUN tar -xvf libwebsockets.tar.gz && \
+        cd /app/libwebsockets/build && \
+        rm -rf * && \
+        cmake .. \
+                -DLWS_WITHOUT_TEST_SERVER=ON \
+                -DLWS_WITHOUT_TESTAPPS=ON && \
+        make && \
+        make install
 RUN mkdir -p /var/baohuang
 CMD ["tail", "-f", "/dev/null"]
