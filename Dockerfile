@@ -55,5 +55,11 @@ RUN tar -xvf libwebsockets.tar.gz && \
                 -DLWS_WITHOUT_TESTAPPS=ON && \
         make && \
         make install
+COPY protobuf-all-3.20.3.tar /app/
+RUN tar -xvf protobuf-all-3.20.3.tar && \
+        cd /app/protobuf-3.20.3/ && \
+        CFLAGS=-fPIC ./configure --prefix=/usr/duole && \
+        make && \
+        make install
 RUN mkdir -p /var/baohuang
 CMD ["tail", "-f", "/dev/null"]
