@@ -61,5 +61,14 @@ RUN tar -xvf protobuf-all-3.20.3.tar && \
         CFLAGS=-fPIC ./configure --prefix=/usr/duole && \
         make && \
         make install
+COPY rocksdb-6.22.1.tar /app/
+RUN yum install -y which
+RUN tar -xvf rocksdb-6.22.1.tar && \
+        cd /app/rocksdb-6.22.1/ && \
+        make shared_lib && \
+        cp -r include/rocksdb/ /usr/local/include/ && \
+        cp librocksdb.so.6.22.1 /usr/local/lib/ && \
+        cd /usr/local/lib && \
+        ln -s librocksdb.so.6.22.1 librocksdb.so
 RUN mkdir -p /var/baohuang
 CMD ["tail", "-f", "/dev/null"]
