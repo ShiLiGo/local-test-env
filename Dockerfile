@@ -88,5 +88,9 @@ RUN mkdir -p /var/baohuang/bin_ai && \
         mkdir -p /var/baohuang/venv_bc && \
         mkdir -p /var/baohuang/venv_log && \
         mkdir -p /var/baohuang/venv_playback && \
+        mkdir -p /var/baohuang/venv_proxy && \
+        mkdir -p /var/baohuang/venv_ai && \
+        mkdir -p /var/baohuang/venv_tier && \
+        mkdir -p /var/baohuang/venv_subscription && \
         mkdir -p /var/www/apps/baohuang
 CMD ["tail", "-f", "/dev/null"]
