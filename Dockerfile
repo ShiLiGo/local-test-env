@@ -70,27 +70,4 @@ RUN tar -xvf rocksdb-6.22.1.tar && \
         cp librocksdb.so.6.22.1 /usr/local/lib/ && \
         cd /usr/local/lib && \
         ln -s librocksdb.so.6.22.1 librocksdb.so
-# RUN mkdir -p /var/baohuang/bin_ai && \
-#         mkdir -p /var/baohuang/bin_conn && \
-#         mkdir -p /var/baohuang/bin_game && \
-#         mkdir -p /var/baohuang/bin_gameinfo && \
-#         mkdir -p /var/baohuang/bin_mail && \
-#         mkdir -p /var/baohuang/bin_prematch && \
-#         mkdir -p /var/baohuang/bin_room && \
-#         mkdir -p /var/baohuang/bin_team && \
-#         mkdir -p /var/baohuang/bin_teamarbiter && \
-#         mkdir -p /var/baohuang/bin_bc && \
-#         mkdir -p /var/baohuang/bin_log && \
-#         mkdir -p /var/baohuang/bin_playback && \
-#         mkdir -p /var/baohuang/bin_proxy && \
-#         mkdir -p /var/baohuang/bin_subscription && \
-#         mkdir -p /var/baohuang/bin_tier && \
-#         mkdir -p /var/baohuang/venv_bc && python3 -m venv /var/baohuang/venv_bc && \
-#         mkdir -p /var/baohuang/venv_log && python3 -m venv /var/baohuang/venv_log && \
-#         mkdir -p /var/baohuang/venv_playback && python3 -m venv /var/baohuang/venv_playback && \
-#         mkdir -p /var/baohuang/venv_proxy && python3 -m venv /var/baohuang/venv_proxy && \
-#         mkdir -p /var/baohuang/venv_ai && python3 -m venv /var/baohuang/venv_ai && \
-#         mkdir -p /var/baohuang/venv_tier && python3 -m venv /var/baohuang/venv_tier && \
-#         mkdir -p /var/baohuang/venv_subscription && python3 -m venv /var/baohuang/venv_subscription && \
-#         mkdir -p /var/www/apps/baohuang && python3 -m venv /var/www/apps/baohuang
 CMD ["tail", "-f", "/dev/null"]
