@@ -84,13 +84,13 @@ RUN mkdir -p /var/baohuang/bin_ai && \
         mkdir -p /var/baohuang/bin_playback && \
         mkdir -p /var/baohuang/bin_proxy && \
         mkdir -p /var/baohuang/bin_subscription && \
-        mkdir -p /var/baohuang/bin_tier && \
-        mkdir -p /var/baohuang/venv_bc && \
-        mkdir -p /var/baohuang/venv_log && \
-        mkdir -p /var/baohuang/venv_playback && \
-        mkdir -p /var/baohuang/venv_proxy && \
-        mkdir -p /var/baohuang/venv_ai && \
-        mkdir -p /var/baohuang/venv_tier && \
-        mkdir -p /var/baohuang/venv_subscription && \
-        mkdir -p /var/www/apps/baohuang
+        mkdir -p /var/baohuang/bin_tier && python3 -m venv /var/baohuang/bin_tier && \
+        mkdir -p /var/baohuang/venv_bc && python3 -m venv /var/baohuang/venv_bc && \
+        mkdir -p /var/baohuang/venv_log && python3 -m venv /var/baohuang/venv_log && \
+        mkdir -p /var/baohuang/venv_playback && python3 -m venv /var/baohuang/venv_playback && \
+        mkdir -p /var/baohuang/venv_proxy && python3 -m venv /var/baohuang/venv_proxy && \
+        mkdir -p /var/baohuang/venv_ai && python3 -m venv /var/baohuang/venv_ai && \
+        mkdir -p /var/baohuang/venv_tier && python3 -m venv /var/baohuang/venv_tier && \
+        mkdir -p /var/baohuang/venv_subscription && python3 -m venv /var/baohuang/venv_subscription && \
+        mkdir -p /var/www/apps/baohuang && python3 -m venv /var/www/apps/baohuang
 CMD ["tail", "-f", "/dev/null"]
