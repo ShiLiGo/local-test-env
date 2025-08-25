@@ -70,4 +70,5 @@ RUN tar -xvf rocksdb-6.22.1.tar && \
         cp librocksdb.so.6.22.1 /usr/local/lib/ && \
         cd /usr/local/lib && \
         ln -s librocksdb.so.6.22.1 librocksdb.so
+RUN yum install -y crontab nginx redis
 CMD ["tail", "-f", "/dev/null"]
